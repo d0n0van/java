@@ -1,0 +1,9 @@
+*.iml
+*.swp
+.classpath
+.project
+.settings
+tags
+target
+.idea
+*.iml%
