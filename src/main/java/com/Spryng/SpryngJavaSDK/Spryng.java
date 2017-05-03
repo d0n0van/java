@@ -10,16 +10,12 @@ public class Spryng implements Constants
 
     protected boolean secretIsAPIKey = false;
 
-    public SMS SMS;
-
     public Spryng(String username, String secret, String sender, boolean secretIsAPIKey)
     {
         this.setUsername(username);
         this.setSecret(secret);
         this.setSender(sender);
         this.setSecretIsAPIKey(secretIsAPIKey);
-
-        this.SMS = new SMS();
     }
 
     public String getUsername()
