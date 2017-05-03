@@ -5,11 +5,23 @@
     <version>0.1</version>
     <name>Spryng Java SDK</name>
     <description>The official Spryng Java SDK, used to sent SMS messages globally.</description>
+    <url>https://github.com/spryng/java</url>
     <organization>
         <name>Spryng B.V.</name>
         <url>https://spryng.nl/</url>
     </organization>
-    <url>https://github.com/spryng/java</url>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5</version>
+        </dependency>
+    </dependencies>
     <licenses>
         <license>
             <name>MIT</name>

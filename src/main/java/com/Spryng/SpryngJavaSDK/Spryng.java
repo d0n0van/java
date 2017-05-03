@@ -10,12 +10,16 @@ public class Spryng implements Constants
 
     protected boolean secretIsAPIKey = false;
 
-    public Spryng(String username, String secret, String sender, boolean secretIsAPIKey)
+    public SMS SMS;
+
+    public Spryng(String username, String secret, String sender, boolean secretIsAPIKey) throws SpryngException
     {
         this.setUsername(username);
         this.setSecret(secret);
         this.setSender(sender);
         this.setSecretIsAPIKey(secretIsAPIKey);
+
+        this.SMS = new SMS(this);
     }
 
     public String getUsername()
@@ -43,8 +47,12 @@ public class Spryng implements Constants
         return sender;
     }
 
-    public void setSender(String sender)
+    public void setSender(String sender) throws SpryngException
     {
+        if (sender.length() > SENDER_MAX_LENGTH)
+        {
+            throw new SpryngException("The Sender ID you provided is too long. The maximum length is: " + SENDER_MAX_LENGTH);
+        }
         this.sender = sender;
     }
 
