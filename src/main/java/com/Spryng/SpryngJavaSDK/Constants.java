@@ -64,4 +64,9 @@ public interface Constants
      * The maximum length of the `reference` parameter.
      */
     public final int REFERENCE_MAX_LENGTH = 256;
+
+    /**
+     * The maximum length of the `sender` parameter.
+     */
+    public final int SENDER_MAX_LENGTH = 11;
 }

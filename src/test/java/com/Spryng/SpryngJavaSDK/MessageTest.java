@@ -4,6 +4,10 @@ import org.junit.Test;
 
 public class MessageTest extends SpryngTest
 {
+    public MessageTest() throws SpryngException
+    {
+    }
+
     @Test
     public void testMessageValidationFailsWhenDestinationIsNotSet()
     {

@@ -2,6 +2,8 @@ package com.Spryng.SpryngJavaSDK;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents a SMS message.
@@ -73,9 +75,19 @@ public class Message implements Constants
      */
     public boolean isValid()
     {
-        if (this.getDestination() == null || !this.getDestination().matches("/^[1-9]{1}[0-9]{3,14}$/"))
+        if (this.getDestination() == null)
         {
             return false;
+        }
+        else
+        {
+            Pattern p = Pattern.compile("^[1-9]{1}[0-9]{3,14}$");
+            Matcher m = p.matcher(this.getDestination());
+
+            if (!m.find())
+            {
+                return false;
+            }
         }
 
         if (this.getBody() == null || (this.isAllowLong() && this.getBody().length() > MAX_BODY_LENGTH_WITH_ALLOW_LONG) ||

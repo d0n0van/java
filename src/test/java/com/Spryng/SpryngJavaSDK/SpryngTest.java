@@ -13,11 +13,11 @@ public class SpryngTest extends TestCase
 
     public final String destination = "";
 
-    public final String senderName = "Spryng B.V.";
+    public final String senderName = "Spryng BV";
 
     public Spryng spryng;
 
-    public SpryngTest()
+    public SpryngTest() throws SpryngException
     {
         this.spryng = new Spryng(this.username, this.secret, this.senderName, this.secretIsApiKey);
     }
