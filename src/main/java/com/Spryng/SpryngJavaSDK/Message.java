@@ -1,9 +1,12 @@
 package com.Spryng.SpryngJavaSDK;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Represents a SMS message.
  */
-public class Message
+public class Message implements Constants
 {
     /**
      * The destination phone number.
@@ -56,26 +59,39 @@ public class Message
     }
 
     /**
+     * Empty constructor
+     */
+    public Message()
+    {
+
+    }
+
+    /**
      * Checks if the supplied data is valid.
      *
      * @return the boolean
      */
     public boolean isValid()
     {
-        if (this.destination == null || !this.destination.matches("/^[1-9]{1}[0-9]{3,14}$/"))
+        if (this.getDestination() == null || !this.getDestination().matches("/^[1-9]{1}[0-9]{3,14}$/"))
         {
             return false;
         }
 
-        if (this.body == null || (this.allowLong && this.body.length() > 612) || (!this.allowLong && this.body.length()
-            > 160))
+        if (this.getBody() == null || (this.isAllowLong() && this.getBody().length() > MAX_BODY_LENGTH_WITH_ALLOW_LONG) ||
+                (!this.isAllowLong() && this.getBody().length() > DEFAULT_MAX_BODY_LENGTH))
         {
             return false;
         }
 
-        if (this.reference != null)
+        if (this.getRoute() == null)
         {
-            if (this.reference.length() < 1 || this.reference.length() > 256)
+            return false;
+        }
+
+        if (this.getReference() != null)
+        {
+            if (this.getReference().length() < 1 || this.getReference().length() > REFERENCE_MAX_LENGTH)
             {
                 return false;
             }

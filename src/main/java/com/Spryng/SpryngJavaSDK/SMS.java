@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 
 public class SMS implements Constants
 {
-    public SpryngResponse send(Message message)
+    public SpryngResponse send(Message message) throws SpryngException
     {
         URI uri;
         try
@@ -15,7 +15,7 @@ public class SMS implements Constants
         }
         catch (URISyntaxException ex)
         {
-            return SpryngResponse.SDK_ERROR;
+            throw new SpryngException("Error occurred while trying to initiate URI for SMS request.");
         }
 
         return SpryngResponse.OK;
