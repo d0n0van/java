@@ -44,4 +44,24 @@ public interface Constants
      * User agent with client information.
      */
     String USER_AGENT = "SpryngSDKJava/" + VERSION;
+
+    /**
+     * Encoding used for URL's
+     */
+    String URL_ENCODING = "UTF-8";
+
+    /**
+     * The maximum length a message body can be without enabling `allow_long`
+     */
+    public final int DEFAULT_MAX_BODY_LENGTH = 160;
+
+    /**
+     * The maximum length a message body can be, even when `allow_long` is enabled.
+     */
+    public final int MAX_BODY_LENGTH_WITH_ALLOW_LONG = 612;
+
+    /**
+     * The maximum length of the `reference` parameter.
+     */
+    public final int REFERENCE_MAX_LENGTH = 256;
 }
