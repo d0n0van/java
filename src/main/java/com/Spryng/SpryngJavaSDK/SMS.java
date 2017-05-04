@@ -1,6 +1,5 @@
 package com.Spryng.SpryngJavaSDK;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -9,13 +8,15 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SMS implements Constants
+public class SMS implements Constants, APIResponses
 {
 
     /**
      * Instance of the main class to receive auth informaion.
      */
     Spryng api;
+
+    RequestHandler http;
 
     /**
      * SMS Class constructor
@@ -25,6 +26,7 @@ public class SMS implements Constants
     public SMS(Spryng api)
     {
         this.api = api;
+        this.http = new RequestHandler();
     }
 
     /**
@@ -83,8 +85,76 @@ public class SMS implements Constants
             throw new SpryngException("Error occurred while trying to initiate URI for SMS request.");
         }
 
-        System.out.println(uri.toString());
+        this.http.setUri(uri);
+        this.http.setQueryParameters(queryParameters);
 
-        return SpryngResponse.OK;
+        String response = this.http.send();
+        Integer intResponse = Integer.parseInt(response);
+
+        return this.getSpryngResponse(intResponse);
+    }
+
+    private SpryngResponse getSpryngResponse(int response)
+    {
+        SpryngResponse spryngResponse;
+        switch (response)
+        {
+            case RESPONSE_OK:
+                spryngResponse = SpryngResponse.OK;
+                break;
+            case RESPONSE_MISSING_PARAMETER:
+                spryngResponse = SpryngResponse.MISSING_PARAMETER;
+                break;
+            case RESPONSE_USERNAME_TOO_LONG:
+                spryngResponse = SpryngResponse.USERNAME_TOO_LONG;
+                break;
+            case RESPONSE_USERNAME_TOO_SHORT:
+                spryngResponse = SpryngResponse.USERNAME_TOO_SHORT;
+                break;
+            case RESPONSE_PASSWORD_TOO_LONG:
+                spryngResponse = SpryngResponse.PASSWORD_TOO_LONG;
+                break;
+            case RESPONSE_PASSWORD_TOO_SHORT:
+                spryngResponse = SpryngResponse.PASSWORD_TOO_SHORT;
+                break;
+            case RESPONSE_DESTINATION_TOO_LONG:
+                spryngResponse = SpryngResponse.DESTINATION_TOO_LONG;
+                break;
+            case RESPONSE_DESTINATION_TOO_SHORT:
+                spryngResponse = SpryngResponse.DESTINATION_TOO_SHORT;
+                break;
+            case RESPONSE_SENDER_TOO_LONG:
+                spryngResponse = SpryngResponse.SENDER_TOO_LONG;
+                break;
+            case RESPONSE_SENDER_TOO_SHORT:
+                spryngResponse = SpryngResponse.SENDER_TOO_SHORT;
+                break;
+            case RESPONSE_CONTENT_TOO_LONG:
+                spryngResponse = SpryngResponse.CONTENT_TOO_LONG;
+                break;
+            case RESPONSE_CONTENT_TOO_SHORT:
+                spryngResponse = SpryngResponse.CONTENT_TOO_SHORT;
+                break;
+            case RESPONSE_SECURITY_ERROR:
+                spryngResponse = SpryngResponse.SECURITY_ERROR;
+                break;
+            case RESPONSE_UNKNOWN_ROUTE:
+                spryngResponse = SpryngResponse.UNKNOWN_ROUTE;
+                break;
+            case RESPONSE_ROUTE_ACCESS_VIOLATION:
+                spryngResponse = SpryngResponse.ROUTE_ACCESS_VIOLATION;
+                break;
+            case RESPONSE_INSUFFICIENT_CREDITS:
+                spryngResponse = SpryngResponse.INSUFFICIENT_CREDITS;
+                break;
+            case RESPONSE_TECHNICAL_ERROR:
+                spryngResponse = SpryngResponse.TECHNICAL_ERROR;
+                break;
+            default:
+                spryngResponse = SpryngResponse.SDK_ERROR;
+                break;
+        }
+
+        return spryngResponse;
     }
 }

@@ -12,6 +12,8 @@ public class Spryng implements Constants
 
     public SMS SMS;
 
+    public Credits credits;
+
     public Spryng(String username, String secret, String sender, boolean secretIsAPIKey) throws SpryngException
     {
         this.setUsername(username);
@@ -20,6 +22,7 @@ public class Spryng implements Constants
         this.setSecretIsAPIKey(secretIsAPIKey);
 
         this.SMS = new SMS(this);
+        this.credits = new Credits(this);
     }
 
     public String getUsername()
