@@ -90,7 +90,7 @@ public class SMS implements Constants, APIResponses
 
         String response = this.http.send();
         Integer intResponse = Integer.parseInt(response);
-        
+
         return this.getSpryngResponse(intResponse);
     }
 
